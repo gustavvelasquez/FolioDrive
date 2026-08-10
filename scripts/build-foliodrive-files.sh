@@ -87,13 +87,14 @@ _build_meson() {
   fi
 
   log "meson setup (prefix=${PREFIX})"
-  meson setup build --prefix="${PREFIX}" -Dtests=false
+  # Nautilus 50.x: tests = none|headless|all (não boolean)
+  meson setup build --prefix="${PREFIX}" -Dtests=none || return 1
   log "meson compile -j${NINJA_JOBS}"
-  meson compile -C build -j "${NINJA_JOBS}"
+  meson compile -C build -j "${NINJA_JOBS}" || return 1
 
   STAGE="${BUILD_ROOT}/stage"
   rm -rf "${STAGE}"
-  DESTDIR="${STAGE}" meson install -C build
+  DESTDIR="${STAGE}" meson install -C build || return 1
 
   NAU_BIN="${STAGE}${PREFIX}/bin/nautilus"
   FD_BIN="${STAGE}${PREFIX}/bin/foliodrive-files"
