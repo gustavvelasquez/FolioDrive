@@ -41,14 +41,17 @@ if [[ -d "${FOLIODRIVE_PREFIX}/share/icons/hicolor" ]]; then
 fi
 
 # ELF do fork — NÃO chamar /usr/bin/nautilus
-sudo_run tee "${FOLIODRIVE_WRAPPER}" >/dev/null <<'WRAP'
+# (não usar sudo tee+heredoc: quebra com sudo -S / askpass no stdin)
+_wrap="$(mktemp)"
+cat > "${_wrap}" <<'WRAP'
 #!/usr/bin/env bash
 export LD_LIBRARY_PATH="/opt/foliodrive/lib/x86_64-linux-gnu:/opt/foliodrive/lib:${LD_LIBRARY_PATH:-}"
 export XDG_DATA_DIRS="/opt/foliodrive/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 export GSETTINGS_SCHEMA_DIR="/opt/foliodrive/share/glib-2.0/schemas${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}"
 exec /opt/foliodrive/bin/foliodrive-files "$@"
 WRAP
-sudo_run chmod 755 "${FOLIODRIVE_WRAPPER}"
+sudo_run install -m 755 "${_wrap}" "${FOLIODRIVE_WRAPPER}"
+rm -f "${_wrap}"
 
 # Exigir ELF (segundo gerenciador real)
 if file "${FOLIODRIVE_BIN}" | grep -qi 'shell script\|ASCII text'; then
