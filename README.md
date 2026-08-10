@@ -13,14 +13,17 @@ Pasta `~/SeaDrive` sob demanda, menus **Free up space** / **Always keep** e colu
 
 ## Como instalar (Ubuntu novo)
 
-**Não precisa clonar este repositório.** Baixe o pacote na página de [Releases](https://github.com/gustavvelasquez/FolioDrive/releases) e instale:
+**Um comando** (baixa o pacote da [Release](https://github.com/gustavvelasquez/FolioDrive/releases) deste repositório e instala):
 
 ```bash
-wget https://github.com/gustavvelasquez/FolioDrive/releases/download/v0.1.0/FolioDrive-0.1.0-installer.tar.gz
-tar -xzf FolioDrive-0.1.0-installer.tar.gz
-cd FolioDrive-0.1.0-installer
-chmod +x installer/install-foliodrive.sh installer/steps/*.sh
-./installer/install-foliodrive.sh
+curl -fsSL https://raw.githubusercontent.com/gustavvelasquez/FolioDrive/main/install.sh | bash
+```
+
+Sem pipe (se preferir ver o script antes):
+
+```bash
+wget -qO install.sh https://raw.githubusercontent.com/gustavvelasquez/FolioDrive/main/install.sh
+bash install.sh
 ```
 
 Depois:
@@ -29,33 +32,32 @@ Depois:
 2. Abra **FolioDrive** em `~/SeaDrive`  
 3. Teste Free up space / Always keep e a coluna SeaDrive  
 
-O instalador **não** baixa nada do site oficial do Seafile: tudo já vem pinado dentro do `.tar.gz` do Release.
+O `install.sh` **não** baixa do site do Seafile: só puxa o `.tar.gz` pinado da **Release FolioDrive** (v0.1.0).
+
+### Onde fica o quê no GitHub
+
+| Onde | O que é | Exemplo |
+|------|---------|---------|
+| Aba **Code** (`main`) | Código pequeno (scripts, README) | `install.sh`, `installer/` |
+| Aba **Releases** | Pacote instalável (~154 MB) | `FolioDrive-0.1.0-installer.tar.gz` (dentro: AppImage SeaDrive, extensão…) |
+
+Página Releases: https://github.com/gustavvelasquez/FolioDrive/releases
 
 ---
 
-## O que é este repositório (git)
+## Desenvolvimento (só maintainer)
 
-- Código do instalador, extensão, `VERSIONS.json`, docs  
-- Para **desenvolvimento** e manutenção  
-- Arquivos grandes (AppImage SeaDrive, etc.) ficam no **Release**, não no clone  
-
-Clonar o git **sem** o pacote do Release **não** basta para instalar.
-
----
-
-## Desenvolvimento / montar um release novo
-
-Feito no lab ou nesta pasta, **só pelo maintainer** (não é passo do usuário final):
+Não é passo do usuário. Montar um release novo:
 
 ```bash
 ./scripts/fetch-seadrive.sh
-./scripts/build-foliodrive-files-wrapper.sh   # ou build-foliodrive-files.sh
+./scripts/build-foliodrive-files-wrapper.sh
 ./scripts/build-bundle.sh
 ./scripts/update-versions.sh
 ./scripts/package-release.sh
 ```
 
-Anexe `dist/FolioDrive-x.y.z-installer.tar.gz` à Release no GitHub.
+Anexe o `.tar.gz` em uma Release nova e atualize a versão em `install.sh` / `VERSIONS.json`.
 
 Detalhes: [docs/VM-BUILD.md](docs/VM-BUILD.md)
 
@@ -63,4 +65,4 @@ Detalhes: [docs/VM-BUILD.md](docs/VM-BUILD.md)
 
 GPL-3.0 — [LICENSE](LICENSE) · [NOTICE](NOTICE)
 
-Mensagens de commit deste projeto: **português do Brasil**.
+Commits: **português do Brasil** ([CONTRIBUTING.md](CONTRIBUTING.md)).
