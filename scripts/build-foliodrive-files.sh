@@ -85,7 +85,7 @@ _build_meson() {
 
   log "meson setup (prefix=${PREFIX})"
   # Nautilus 50.x: tests = none|headless|all (não boolean)
-  meson setup build --prefix="${PREFIX}" -Dtests=none || return 1
+  meson setup build --prefix="${PREFIX}" -Dtests=none -Dextensions=false || return 1
   log "meson compile -j${NINJA_JOBS}"
   meson compile -C build -j "${NINJA_JOBS}" || return 1
 

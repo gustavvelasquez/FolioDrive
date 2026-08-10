@@ -30,15 +30,35 @@ fi
 
 sudo_run chmod 755 "${FOLIODRIVE_BIN}"
 
+# Schemas / ícones do fork
+if [[ -d "${FOLIODRIVE_PREFIX}/share/glib-2.0/schemas" ]]; then
+  sudo_run glib-compile-schemas "${FOLIODRIVE_PREFIX}/share/glib-2.0/schemas" 2>/dev/null || true
+fi
+if [[ -d "${FOLIODRIVE_PREFIX}/share/icons/hicolor" ]]; then
+  sudo_run gtk4-update-icon-cache -q -t -f "${FOLIODRIVE_PREFIX}/share/icons/hicolor" 2>/dev/null \
+    || sudo_run gtk-update-icon-cache -q -t -f "${FOLIODRIVE_PREFIX}/share/icons/hicolor" 2>/dev/null \
+    || true
+fi
+
+# ELF do fork — NÃO chamar /usr/bin/nautilus
 sudo_run tee "${FOLIODRIVE_WRAPPER}" >/dev/null <<'WRAP'
 #!/usr/bin/env bash
+export LD_LIBRARY_PATH="/opt/foliodrive/lib/x86_64-linux-gnu:/opt/foliodrive/lib:${LD_LIBRARY_PATH:-}"
 export XDG_DATA_DIRS="/opt/foliodrive/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+export GSETTINGS_SCHEMA_DIR="/opt/foliodrive/share/glib-2.0/schemas${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}"
 exec /opt/foliodrive/bin/foliodrive-files "$@"
 WRAP
 sudo_run chmod 755 "${FOLIODRIVE_WRAPPER}"
+
+# Exigir ELF (segundo gerenciador real)
+if file "${FOLIODRIVE_BIN}" | grep -qi 'shell script\|ASCII text'; then
+  echo "ERRO: ${FOLIODRIVE_BIN} ainda é script wrapper — pacote inválido."
+  exit 1
+fi
 
 sudo_run install -m 644 "${BUNDLE_DIR}/com.foliodrive.Files.desktop" \
   /usr/share/applications/com.foliodrive.Files.desktop
 sudo_run update-desktop-database /usr/share/applications/ 2>/dev/null || true
 
-echo "foliodrive-files OK: ${FOLIODRIVE_WRAPPER}"
+echo "foliodrive-files OK (ELF): ${FOLIODRIVE_BIN}"
+echo "atalho: ${FOLIODRIVE_WRAPPER}"
