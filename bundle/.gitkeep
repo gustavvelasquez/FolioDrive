@@ -1,0 +1,7 @@
+# GitHub Releases — não commitar blobs
+bundle/*.AppImage
+bundle/*.tar.gz
+bundle/*.run
+bundle/seadrive_extension.py
+bundle/data/
+dist/

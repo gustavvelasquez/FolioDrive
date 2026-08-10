@@ -1,0 +1,6 @@
+# Blobs pinados — gerados pelo maintainer; vão nos GitHub Releases, não no git.
+bundle/*.AppImage
+bundle/*.tar.gz
+bundle/*.run
+bundle/seadrive_extension.py
+bundle/data/

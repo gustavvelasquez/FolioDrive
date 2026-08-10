@@ -1,0 +1,40 @@
+{
+  "product": "FolioDrive",
+  "product_version": "0.1.0",
+  "target": {
+    "distro": "ubuntu",
+    "release": "24.04",
+    "desktop": "gnome",
+    "arch": "x86_64"
+  },
+  "components": {
+    "seadrive_appimage": {
+      "version": "3.0.23",
+      "file": "SeaDrive-x86_64-3.0.23.AppImage",
+      "sha256": "",
+      "upstream_tag": "v3.0.23",
+      "upstream_url": "https://github.com/haiwen/seadrive-fuse/releases/download/v3.0.23/SeaDrive-x86_64.AppImage",
+      "note": "Baixado uma vez pelo maintainer; usuário nunca usa upstream_url"
+    },
+    "foliodrive_files": {
+      "version": "46.0-foliodrive.1",
+      "file": "foliodrive-files-46.0-foliodrive.1.tar.gz",
+      "sha256": "",
+      "nautilus_upstream_tag": "46.0",
+      "nautilus_upstream_commit": "",
+      "foliodrive_patches_commit": ""
+    },
+    "seadrive_extension": {
+      "version": "0.0.1-foliodrive.1",
+      "file": "seadrive_extension.py",
+      "sha256": "",
+      "source_commit": ""
+    }
+  },
+  "installer": {
+    "script": "install-foliodrive.sh",
+    "min_bash": "5.0"
+  },
+  "released_at": "",
+  "release_notes_url": ""
+}

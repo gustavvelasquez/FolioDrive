@@ -1,0 +1,41 @@
+FolioDrive — Third-Party Notices
+================================
+
+FolioDrive is free software (GPL-3.0). This file lists bundled or
+redistributed components and their licenses.
+
+SeaDrive (AppImage)
+-------------------
+- Upstream: Seafile Ltd. / haiwen (seadrive-gui, seadrive-fuse)
+- Typical licenses: Apache-2.0 (GUI), GPL-3.0 (FUSE component inside AppImage)
+- Source: https://github.com/haiwen/seadrive-gui
+         https://github.com/haiwen/seadrive-fuse
+- FolioDrive pins a specific AppImage version in VERSIONS.json; the
+  maintainer downloads it once for releases. End users install from
+  FolioDrive releases only.
+
+Nautilus fork (foliodrive-files)
+--------------------------------
+- Upstream: GNOME Nautilus
+- License: GPL-3.0-or-later
+- Source: https://gitlab.gnome.org/GNOME/nautilus
+- FolioDrive ships patched sources in this repository (forks/nautilus/)
+  and offers corresponding source for each release tag.
+
+SeaDrive Nautilus extension (seadrive_extension.py)
+---------------------------------------------------
+- Based on Seafile official seadrive_ext; modified in lab fork
+  (StorageOneDriveLike/forks/seadrive-ext).
+- License: treat as GPL-3.0-compatible with upstream Seafile components;
+  source included in this repository.
+
+GNOME / system libraries
+------------------------
+- Runtime dependencies (GTK, libportal, libfuse2, python3-nautilus)
+  are provided by the user's Ubuntu 24.04 system via apt at install time.
+
+Trademarks
+----------
+- "Seafile", "SeaDrive", "GNOME", "Nautilus", "Ubuntu" are trademarks
+  of their respective owners. FolioDrive is not affiliated with Microsoft
+  OneDrive or Seafile Ltd.

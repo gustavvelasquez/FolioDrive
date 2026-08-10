@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=FolioDrive
+Comment=Gerenciador de arquivos FolioDrive (Seafile)
+Exec=foliodrive-files %U
+Icon=folder-remote
+Type=Application
+Categories=Utility;FileManager;Network;
+StartupNotify=true
+Terminal=false
+MimeType=inode/directory;

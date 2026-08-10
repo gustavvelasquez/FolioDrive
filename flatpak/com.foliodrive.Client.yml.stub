@@ -1,0 +1,8 @@
+# Manifest stub — implementar na fase Flathub
+# id: com.foliodrive.Client
+# runtime: org.gnome.Platform
+# runtime-version: '46'
+# sdk: org.gnome.Sdk
+#
+# Build a partir dos tarballs/assets do release FolioDrive (VERSIONS.json).
+# Ver flatpak/README.md
