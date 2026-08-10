@@ -29,22 +29,24 @@ _build_meson() {
   log "Dependências de build (meson) — Nautilus ${NAUTILUS_TAG}"
   sudo apt-get update -y
   sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    build-essential meson ninja-build pkg-config git \
+    build-essential meson ninja-build pkg-config git wget \
     libglib2.0-dev libgtk-4-dev libadwaita-1-dev \
     libportal-dev libportal-gtk4-dev \
     libgexiv2-dev libcloudproviders-dev libcue-dev \
     libxml2-dev libsqlite3-dev \
     python3-nautilus libnautilus-extension-dev \
     gettext desktop-file-utils shared-mime-info \
+    libglycin-2-dev libglycin-gtk4-2-dev \
     libtinysparql-dev 2>/dev/null \
     || sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      build-essential meson ninja-build pkg-config git \
+      build-essential meson ninja-build pkg-config git wget \
       libglib2.0-dev libgtk-4-dev libadwaita-1-dev \
       libportal-dev libportal-gtk4-dev \
       libgexiv2-dev libcloudproviders-dev libcue-dev \
       libxml2-dev libsqlite3-dev \
       python3-nautilus libnautilus-extension-dev \
-      gettext desktop-file-utils shared-mime-info
+      gettext desktop-file-utils shared-mime-info \
+      libglycin-2-dev libglycin-gtk4-2-dev
 
   # tracker/sparql: nome do pacote varia por release
   sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
