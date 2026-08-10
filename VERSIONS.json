@@ -3,7 +3,7 @@
   "product_version": "0.1.0",
   "target": {
     "distro": "ubuntu",
-    "release": "24.04",
+    "release": "26.04",
     "desktop": "gnome",
     "arch": "x86_64"
   },

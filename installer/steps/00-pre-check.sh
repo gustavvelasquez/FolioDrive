@@ -24,10 +24,10 @@ if [[ -f /etc/os-release ]]; then
   # shellcheck disable=SC1091
   source /etc/os-release
   if [[ "${ID:-}" != "ubuntu" ]]; then
-    echo "AVISO: testado em Ubuntu 24.04 GNOME; detectado: ${ID:-desconhecido}"
+    echo "AVISO: testado em Ubuntu 26.04 GNOME; detectado: ${ID:-desconhecido}"
   fi
-  if [[ "${VERSION_ID:-}" != "24.04" ]]; then
-    echo "AVISO: FolioDrive 0.1.0 alvo Ubuntu 24.04; detectado ${VERSION_ID:-?}"
+  if [[ "${VERSION_ID:-}" != "26.04" ]]; then
+    echo "AVISO: FolioDrive 0.1.0 alvo Ubuntu 26.04; detectado ${VERSION_ID:-?}"
   fi
 fi
 

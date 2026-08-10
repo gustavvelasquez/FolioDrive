@@ -20,7 +20,8 @@ if ! dpkg -s libfuse2t64 >/dev/null 2>&1 && ! dpkg -s libfuse2 >/dev/null 2>&1; 
 fi
 
 if [[ "${SKIP_LIBREOFFICE}" -eq 0 ]]; then
-  log "LibreOffice Calc (abrir .xlsx)"
+  # Temporário (lab): abrir .xlsx. NÃO faz parte do produto final — será removido.
+  log "LibreOffice Calc (temporário — teste .xlsx; será removido do instalador)"
   sudo_run env DEBIAN_FRONTEND=noninteractive apt-get install -y \
     libreoffice-calc libreoffice-gnome || true
 fi

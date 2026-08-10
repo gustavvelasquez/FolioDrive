@@ -13,14 +13,22 @@ tar_path="${BUNDLE_DIR}/${tarball}"
 sudo_run mkdir -p "$(dirname "${FOLIODRIVE_PREFIX}")"
 sudo_run tar -xzf "${tar_path}" -C /
 
-if [[ ! -x "${FOLIODRIVE_BIN}" ]] && [[ -x "${FOLIODRIVE_PREFIX}/bin/nautilus" ]]; then
+# Tarball gerado em host sem +x: forçar permissão após extrair
+if [[ -f "${FOLIODRIVE_BIN}" ]]; then
+  sudo_run chmod 755 "${FOLIODRIVE_BIN}"
+elif [[ -f "${FOLIODRIVE_PREFIX}/bin/nautilus" ]]; then
   sudo_run mv "${FOLIODRIVE_PREFIX}/bin/nautilus" "${FOLIODRIVE_BIN}"
+  sudo_run chmod 755 "${FOLIODRIVE_BIN}"
 fi
 
-if [[ ! -x "${FOLIODRIVE_BIN}" ]]; then
-  echo "Binário não encontrado: ${FOLIODRIVE_BIN}"
+if [[ ! -f "${FOLIODRIVE_BIN}" ]]; then
+  echo "Arquivo ausente: ${FOLIODRIVE_BIN}"
+  echo "Conteúdo de ${FOLIODRIVE_PREFIX}/bin (se existir):"
+  ls -la "${FOLIODRIVE_PREFIX}/bin" 2>/dev/null || echo "(diretório inexistente)"
   exit 1
 fi
+
+sudo_run chmod 755 "${FOLIODRIVE_BIN}"
 
 sudo_run tee "${FOLIODRIVE_WRAPPER}" >/dev/null <<'WRAP'
 #!/usr/bin/env bash

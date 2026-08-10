@@ -6,7 +6,7 @@ Pasta `~/SeaDrive` sob demanda, menus **Free up space** / **Always keep** e colu
 
 | Item | Valor |
 |------|--------|
-| Sistema | Ubuntu 24.04 LTS Desktop GNOME (x86_64) |
+| Sistema | Ubuntu **26.04** LTS Desktop GNOME (x86_64) |
 | Servidor Seafile | Instalação à parte (Docker) — **não** vem neste pacote |
 
 ---
@@ -34,6 +34,8 @@ Depois:
 
 O `install.sh` **não** baixa do site do Seafile: só puxa o `.tar.gz` pinado da **Release FolioDrive** (v0.1.0).
 
+**LibreOffice Calc:** o instalador pode instalar o Calc só para **teste** de abrir `.xlsx`. **Não** faz parte do produto final e **será removido** numa versão futura. Para pular: `bash install.sh --skip-libreoffice`.
+
 ### Onde fica o quê no GitHub
 
 | Onde | O que é | Exemplo |
@@ -47,7 +49,7 @@ Página Releases: https://github.com/gustavvelasquez/FolioDrive/releases
 
 ## Desenvolvimento (só maintainer)
 
-Não é passo do usuário. Montar um release novo:
+Não é passo do usuário. Montar um release novo (no Ubuntu ou no lab):
 
 ```bash
 ./scripts/fetch-seadrive.sh

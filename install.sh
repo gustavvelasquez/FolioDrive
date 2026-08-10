@@ -10,12 +10,14 @@
 set -euo pipefail
 
 REPO="gustavvelasquez/FolioDrive"
-VERSION="${FOLIODRIVE_VERSION:-0.1.0}"
-TAG="v${VERSION}"
-PKG="FolioDrive-${VERSION}-installer"
+# Nome PRODUCT_VERSION: não usar VERSION — /etc/os-release sobrescreve VERSION.
+PRODUCT_VERSION="${FOLIODRIVE_VERSION:-0.1.0}"
+TAG="v${PRODUCT_VERSION}"
+PKG="FolioDrive-${PRODUCT_VERSION}-installer"
 TAR="${PKG}.tar.gz"
 URL="https://github.com/${REPO}/releases/download/${TAG}/${TAR}"
 WORKDIR="${TMPDIR:-/tmp}/foliodrive-bootstrap-$$"
+TARGET_UBUNTU="26.04"
 
 log() { printf '\n==> %s\n' "$*"; }
 
@@ -33,8 +35,8 @@ fi
 if [[ -f /etc/os-release ]]; then
   # shellcheck disable=SC1091
   source /etc/os-release
-  if [[ "${ID:-}" != "ubuntu" ]] || [[ "${VERSION_ID:-}" != "24.04" ]]; then
-    echo "AVISO: o pacote FolioDrive ${VERSION} foi testado em Ubuntu 24.04 GNOME."
+  if [[ "${ID:-}" != "ubuntu" ]] || [[ "${VERSION_ID:-}" != "${TARGET_UBUNTU}" ]]; then
+    echo "AVISO: o pacote FolioDrive ${PRODUCT_VERSION} foi testado em Ubuntu ${TARGET_UBUNTU} GNOME."
     echo "       Seu sistema: ${PRETTY_NAME:-desconhecido} (VERSION_ID=${VERSION_ID:-?})"
     echo "       Pode funcionar, mas ainda não foi validado nesta versão."
   fi
@@ -62,7 +64,7 @@ mkdir -p "${WORKDIR}"
 cleanup() { rm -rf "${WORKDIR}"; }
 trap cleanup EXIT
 
-log "Baixando FolioDrive ${VERSION} (Release ${TAG} do GitHub FolioDrive)…"
+log "Baixando FolioDrive ${PRODUCT_VERSION} (Release ${TAG} do GitHub FolioDrive)…"
 echo "URL: ${URL}"
 "${DOWNLOAD[@]}" "${WORKDIR}/${TAR}" "${URL}"
 
