@@ -32,6 +32,8 @@ Depois:
 2. Abra **FolioDrive** em `~/SeaDrive`  
 3. Teste Free up space / Always keep e a coluna SeaDrive  
 
+Menus/coluna ficam **só no FolioDrive** (não no app Arquivos do Ubuntu).
+
 O `install.sh` **não** baixa do site do Seafile: só puxa o `.tar.gz` pinado da **Release FolioDrive** (v0.1.0).
 
 **LibreOffice Calc:** o instalador pode instalar o Calc só para **teste** de abrir `.xlsx`. **Não** faz parte do produto final e **será removido** numa versão futura. Para pular: `bash install.sh --skip-libreoffice`.
@@ -41,7 +43,7 @@ O `install.sh` **não** baixa do site do Seafile: só puxa o `.tar.gz` pinado da
 | Onde | O que é | Exemplo |
 |------|---------|---------|
 | Aba **Code** (`main`) | Código pequeno (scripts, README) | `install.sh`, `installer/` |
-| Aba **Releases** | Pacote instalável (~154 MB) | `FolioDrive-0.1.0-installer.tar.gz` (dentro: AppImage SeaDrive, extensão…) |
+| Aba **Releases** | Pacote instalável (~160 MB) | `FolioDrive-0.1.0-installer.tar.gz` (AppImage SeaDrive + fork Nautilus + extensão) |
 
 Página Releases: https://github.com/gustavvelasquez/FolioDrive/releases
 
@@ -49,19 +51,21 @@ Página Releases: https://github.com/gustavvelasquez/FolioDrive/releases
 
 ## Desenvolvimento (só maintainer)
 
-Não é passo do usuário. Montar um release novo (no Ubuntu ou no lab):
+Não é passo do usuário. Rebuild do fork Nautilus + pacote: use **Ubuntu 26.04** (VM pode ser apagada depois).
+
+Receita completa: **[docs/VM-BUILD.md](docs/VM-BUILD.md)**
+
+Resumo:
 
 ```bash
 ./scripts/fetch-seadrive.sh
-./scripts/build-foliodrive-files-wrapper.sh
+NINJA_JOBS=1 ./scripts/build-foliodrive-files.sh   # fork ELF (não use o wrapper)
 ./scripts/build-bundle.sh
 ./scripts/update-versions.sh
 ./scripts/package-release.sh
 ```
 
-Anexe o `.tar.gz` em uma Release nova e atualize a versão em `install.sh` / `VERSIONS.json`.
-
-Detalhes: [docs/VM-BUILD.md](docs/VM-BUILD.md)
+Anexe o `.tar.gz` na Release e atualize `VERSIONS.json` / `install.sh` se a versão do produto mudar.
 
 ## Licença
 
