@@ -34,8 +34,9 @@ if [[ -f /etc/os-release ]]; then
   # shellcheck disable=SC1091
   source /etc/os-release
   if [[ "${ID:-}" != "ubuntu" ]] || [[ "${VERSION_ID:-}" != "24.04" ]]; then
-    echo "AVISO: FolioDrive ${VERSION} foi testado em Ubuntu 24.04 GNOME."
-    echo "        Detectado: ${PRETTY_NAME:-desconhecido}"
+    echo "AVISO: o pacote FolioDrive ${VERSION} foi testado em Ubuntu 24.04 GNOME."
+    echo "       Seu sistema: ${PRETTY_NAME:-desconhecido} (VERSION_ID=${VERSION_ID:-?})"
+    echo "       Pode funcionar, mas ainda não foi validado nesta versão."
   fi
 fi
 
