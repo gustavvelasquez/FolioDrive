@@ -1,8 +1,8 @@
-# Build FolioDrive na VM Ubuntu 24.04
+# Build FolioDrive na VM Ubuntu 26.04
 
-O bundle **não** vai no git. Monte-o na VM (ou Windows parcial + VM para teste).
+O bundle **não** vai no git. Monte-o numa máquina **Linux Ubuntu 26.04** (VM lab, outra host ou CI).
 
-## Opção A — VM Ubuntu (recomendado, teste real)
+## Pipeline completo (recomendado)
 
 ```bash
 git clone https://github.com/gustavvelasquez/FolioDrive.git
@@ -12,31 +12,15 @@ chmod +x scripts/*.sh installer/install-foliodrive.sh installer/steps/*.sh
 ./installer/install-foliodrive.sh --start
 ```
 
-`build-all.sh` = fetch SeaDrive + build foliodrive-files (meson ou apt fallback) + bundle + sha256 + package.
+`build-all.sh` = fetch SeaDrive + **build meson do fork** Nautilus + bundle + sha256 + package.
 
-## Opção B — Windows (bundle parcial, teste na VM)
-
-```powershell
-cd c:\Repositorios\StorageOneDriveLike\product
-.\scripts\fetch-seadrive.ps1
-.\scripts\build-foliodrive-files-wrapper.ps1
-```
-
-Copie a pasta `product/` para a VM (`copy-lab-client-to-ubuntu.ps1` adaptado) e na VM:
-
-```bash
-cd ~/FolioDrive   # ou product
-./scripts/build-bundle.sh
-./scripts/update-versions.sh
-./scripts/package-release.sh
-./installer/install-foliodrive.sh
-```
+VM com pouca RAM: `NINJA_JOBS=1 ./scripts/build-foliodrive-files.sh`
 
 ## Release GitHub
 
 Anexe `dist/FolioDrive-0.1.0-installer.tar.gz` na tag `v0.1.0`.
 
-## Wrapper vs build completo
+## Wrapper vs fork
 
-- **wrapper** (`build-foliodrive-files-wrapper.*`): `foliodrive-files` delega a `/usr/bin/nautilus`; apt instala nautilus no runtime. OK para v0.1.0.
-- **apt/meson**: Nautilus pinado em `/opt/foliodrive` (promover depois no lab).
+- **fork (produto):** `build-foliodrive-files.sh` → ELF em `/opt/foliodrive`, app-id FolioDrive.
+- **wrapper (debug only):** `build-foliodrive-files-wrapper.sh` — **proibido** no Release.

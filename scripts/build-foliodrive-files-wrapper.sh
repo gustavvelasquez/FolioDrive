@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# Tarball mínimo: wrapper foliodrive-files → /usr/bin/nautilus + prefix share.
-# Permite release/teste antes do build meson/apt completo (Ubuntu precisa ter nautilus via apt).
+# DEBUG ONLY — NÃO usar no Release de produto.
+# Wrapper chama /usr/bin/nautilus (mesmo app); não entrega 2 gerenciadores.
+# Produto: ./scripts/build-foliodrive-files.sh (meson, ELF em /opt/foliodrive).
+echo "ERRO: build-foliodrive-files-wrapper.sh é só debug. Use build-foliodrive-files.sh" >&2
+exit 1
+
 set -euo pipefail
 
 PRODUCT_DIR="$(cd "$(dirname "$0")/.." && pwd)"

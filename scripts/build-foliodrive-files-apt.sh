@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Fallback: empacota nautilus do Ubuntu 24.04 (versão apt pinada) em /opt/foliodrive.
-# Usado quando build meson falha; binário renomeado para foliodrive-files.
+# DEBUG ONLY: copia nautilus do apt → /opt/foliodrive (mesmo app-id; NÃO é fork).
+# Produto exige build meson (build-foliodrive-files.sh).
 set -euo pipefail
 
 PRODUCT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUNDLE_DIR="${PRODUCT_DIR}/bundle"
 PREFIX="/opt/foliodrive"
-TARBALL_NAME="foliodrive-files-46.0-foliodrive.1.tar.gz"
+TARBALL_NAME="foliodrive-files-50.2.2-foliodrive.1.tar.gz"
 STAGE="${STAGE:-/tmp/foliodrive-apt-stage}"
 NAUTILUS_VER="${NAUTILUS_VER:-}"
 

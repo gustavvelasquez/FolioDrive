@@ -17,10 +17,10 @@
       "note": "Baixado uma vez pelo maintainer; usuário nunca usa upstream_url"
     },
     "foliodrive_files": {
-      "version": "46.0-foliodrive.1",
-      "file": "foliodrive-files-46.0-foliodrive.1.tar.gz",
-      "sha256": "1c5b3527c32a0606e58c1c6d599826c9c6fe3f332186bf784e07525ce327eba1",
-      "nautilus_upstream_tag": "46.0",
+      "version": "50.2.2-foliodrive.1",
+      "file": "foliodrive-files-50.2.2-foliodrive.1.tar.gz",
+      "sha256": "",
+      "nautilus_upstream_tag": "50.2.2",
       "nautilus_upstream_commit": "",
       "foliodrive_patches_commit": ""
     },

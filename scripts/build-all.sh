@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pipeline completo do maintainer (Ubuntu 24.04 GNOME).
+# Pipeline completo do maintainer (Ubuntu 26.04 GNOME).
 set -euo pipefail
 
 PRODUCT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
