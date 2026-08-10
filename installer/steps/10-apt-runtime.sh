@@ -6,12 +6,14 @@ need_cmd sudo
 
 log "Runtime apt (FUSE, python3-nautilus, nautilus…)"
 sudo_run apt-get update -y
+# libcloudproviders0: exigido pelo ELF do fork (sem isso: exit 127 ao abrir FolioDrive)
 sudo_run env DEBIAN_FRONTEND=noninteractive apt-get install -y \
   python3-nautilus \
   nautilus \
   ca-certificates \
   libportal1 \
   libportal-gtk3-1 \
+  libcloudproviders0 \
   || true
 
 if ! dpkg -s libfuse2t64 >/dev/null 2>&1 && ! dpkg -s libfuse2 >/dev/null 2>&1; then
