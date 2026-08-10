@@ -4,3 +4,6 @@ bundle/*.tar.gz
 bundle/*.run
 bundle/seadrive_extension.py
 bundle/data/
+bundle/VERSIONS.json
+bundle/com.foliodrive.Files.desktop
+dist/

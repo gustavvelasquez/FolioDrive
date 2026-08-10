@@ -4,10 +4,11 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 need_cmd sudo
 
-log "Runtime apt (FUSE, python3-nautilus…)"
+log "Runtime apt (FUSE, python3-nautilus, nautilus…)"
 sudo_run apt-get update -y
 sudo_run env DEBIAN_FRONTEND=noninteractive apt-get install -y \
   python3-nautilus \
+  nautilus \
   ca-certificates \
   libportal1 \
   libportal-gtk3-1 \

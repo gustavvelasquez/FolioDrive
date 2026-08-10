@@ -11,7 +11,7 @@
     "seadrive_appimage": {
       "version": "3.0.23",
       "file": "SeaDrive-x86_64-3.0.23.AppImage",
-      "sha256": "",
+      "sha256": "77a91e84e4028fafac4f52712b50f327baf9601b75246cbf01883bb725c1f14c",
       "upstream_tag": "v3.0.23",
       "upstream_url": "https://github.com/haiwen/seadrive-fuse/releases/download/v3.0.23/SeaDrive-x86_64.AppImage",
       "note": "Baixado uma vez pelo maintainer; usuário nunca usa upstream_url"
@@ -19,7 +19,7 @@
     "foliodrive_files": {
       "version": "46.0-foliodrive.1",
       "file": "foliodrive-files-46.0-foliodrive.1.tar.gz",
-      "sha256": "",
+      "sha256": "1c5b3527c32a0606e58c1c6d599826c9c6fe3f332186bf784e07525ce327eba1",
       "nautilus_upstream_tag": "46.0",
       "nautilus_upstream_commit": "",
       "foliodrive_patches_commit": ""
@@ -27,7 +27,7 @@
     "seadrive_extension": {
       "version": "0.0.1-foliodrive.1",
       "file": "seadrive_extension.py",
-      "sha256": "",
+      "sha256": "c9ab5a77ab1187ff24a4073ecc1c3ef423c84647430626891d43fb6a3120a6b8",
       "source_commit": ""
     }
   },
@@ -35,6 +35,6 @@
     "script": "install-foliodrive.sh",
     "min_bash": "5.0"
   },
-  "released_at": "",
-  "release_notes_url": ""
+  "released_at": "2026-08-10",
+  "release_notes_url": "https://github.com/gustavvelasquez/FolioDrive/releases/tag/v0.1.0"
 }

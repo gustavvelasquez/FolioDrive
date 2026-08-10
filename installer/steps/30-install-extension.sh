@@ -10,6 +10,13 @@ ext_file="$(read_versions_field components.seadrive_extension.file)"
 sudo_run mkdir -p "${FOLIODRIVE_PREFIX}/share/nautilus-python/extensions"
 sudo_run cp -f "${BUNDLE_DIR}/${ext_file}" \
   "${FOLIODRIVE_PREFIX}/share/nautilus-python/extensions/seadrive_extension.py"
+
+# Plano B: nautilus-python também lê ~/.local (garante menus com wrapper → /usr/bin/nautilus)
+mkdir -p "${HOME}/.local/share/nautilus-python/extensions"
+cp -f "${BUNDLE_DIR}/${ext_file}" \
+  "${HOME}/.local/share/nautilus-python/extensions/seadrive_extension.py"
+rm -f "${HOME}/.local/share/nautilus-python/extensions/seadrive_extension"*.pyc 2>/dev/null || true
+rm -rf "${HOME}/.local/share/nautilus-python/extensions/__pycache__" 2>/dev/null || true
 sudo_run find "${FOLIODRIVE_PREFIX}/share/nautilus-python/extensions" \
   -name 'seadrive_extension*.pyc' -delete 2>/dev/null || true
 sudo_run rm -rf "${FOLIODRIVE_PREFIX}/share/nautilus-python/extensions/__pycache__" 2>/dev/null || true

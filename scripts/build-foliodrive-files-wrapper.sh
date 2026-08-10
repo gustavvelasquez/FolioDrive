@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Tarball mínimo: wrapper foliodrive-files → /usr/bin/nautilus + prefix share.
+# Permite release/teste antes do build meson/apt completo (Ubuntu precisa ter nautilus via apt).
+set -euo pipefail
+
+PRODUCT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+BUNDLE_DIR="${PRODUCT_DIR}/bundle"
+TARBALL_NAME="foliodrive-files-46.0-foliodrive.1.tar.gz"
+STAGE="${STAGE:-/tmp/foliodrive-wrapper-stage}"
+
+rm -rf "${STAGE}"
+mkdir -p "${STAGE}/opt/foliodrive/bin" "${STAGE}/opt/foliodrive/share"
+
+cat > "${STAGE}/opt/foliodrive/bin/foliodrive-files" <<'WRAP'
+#!/usr/bin/env bash
+export XDG_DATA_DIRS="/opt/foliodrive/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+if [[ -x /opt/foliodrive/bin/nautilus-real ]]; then
+  exec /opt/foliodrive/bin/nautilus-real "$@"
+fi
+if [[ -x /usr/bin/nautilus ]]; then
+  exec /usr/bin/nautilus "$@"
+fi
+echo "foliodrive-files: nautilus não encontrado. Rode apt install nautilus."
+exit 1
+WRAP
+chmod +x "${STAGE}/opt/foliodrive/bin/foliodrive-files"
+
+mkdir -p "${STAGE}/opt/foliodrive/share/nautilus-python/extensions"
+mkdir -p "${BUNDLE_DIR}"
+tar -czf "${BUNDLE_DIR}/${TARBALL_NAME}" -C "${STAGE}" opt/foliodrive
+echo "Wrapper tarball: ${BUNDLE_DIR}/${TARBALL_NAME}"
