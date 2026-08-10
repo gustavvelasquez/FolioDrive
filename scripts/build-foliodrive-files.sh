@@ -37,23 +37,11 @@ _build_meson() {
     python3-nautilus libnautilus-extension-dev \
     gettext desktop-file-utils shared-mime-info \
     libglycin-2-dev libglycin-gtk4-2-dev \
-    libtinysparql-dev 2>/dev/null \
-    || sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      build-essential meson ninja-build pkg-config git wget \
-      libglib2.0-dev libgtk-4-dev libadwaita-1-dev \
-      libportal-dev libportal-gtk4-dev \
-      libgexiv2-dev libcloudproviders-dev libcue-dev \
-      libxml2-dev libsqlite3-dev \
-      python3-nautilus libnautilus-extension-dev \
-      gettext desktop-file-utils shared-mime-info \
-      libglycin-2-dev libglycin-gtk4-2-dev
-
-  # tracker/sparql: nome do pacote varia por release
-  sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    libtinysparql-3.0-dev 2>/dev/null \
-    || sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      libtracker-sparql-3.0-dev 2>/dev/null \
-    || true
+    libgnome-autoar-0-dev libgnome-autoar-gtk-0-dev \
+    libgnome-desktop-4-dev libicu-dev \
+    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+    libtinysparql-dev \
+    libgdk-pixbuf-2.0-dev
 
   rm -rf "${BUILD_ROOT}"
   mkdir -p "${BUILD_ROOT}"
