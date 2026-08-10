@@ -41,7 +41,8 @@ _build_meson() {
     libgnome-desktop-4-dev libicu-dev \
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
     libtinysparql-dev \
-    libgdk-pixbuf-2.0-dev
+    libgdk-pixbuf-2.0-dev \
+    blueprint-compiler
 
   rm -rf "${BUILD_ROOT}"
   mkdir -p "${BUILD_ROOT}"
