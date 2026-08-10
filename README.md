@@ -1,72 +1,66 @@
 # FolioDrive
 
-Client Linux open source estilo OneDrive para **Seafile** (self-hosted): pasta `~/SeaDrive`, **Free up space**, **Always keep**, coluna de status no gerenciador **FolioDrive** (fork Nautilus pinado).
+Client Linux **open source** com experiência estilo OneDrive, usando nuvem **Seafile** (servidor seu).
+
+Pasta `~/SeaDrive` sob demanda, menus **Free up space** / **Always keep** e coluna de status.
 
 | Item | Valor |
 |------|--------|
-| Alvo | Ubuntu 24.04 LTS Desktop GNOME (x86_64) |
-| Stack | SeaDrive AppImage + `foliodrive-files` + extensão (pinados) |
-| Servidor | Seafile do usuário (Docker) — **não** incluído |
+| Sistema | Ubuntu 24.04 LTS Desktop GNOME (x86_64) |
+| Servidor Seafile | Instalação à parte (Docker) — **não** vem neste pacote |
 
-Desenvolvimento nesta pasta (`product/` no lab); promovido para o repo **FolioDrive** (produção).
+---
 
-## Instalação (usuário)
+## Como instalar (Ubuntu novo)
 
-Baixe `FolioDrive-x.y.z-installer.tar.gz` em **Releases** do repo FolioDrive:
+**Não precisa clonar este repositório.** Baixe o pacote na página de [Releases](https://github.com/gustavvelasquez/FolioDrive/releases) e instale:
 
 ```bash
+wget https://github.com/gustavvelasquez/FolioDrive/releases/download/v0.1.0/FolioDrive-0.1.0-installer.tar.gz
 tar -xzf FolioDrive-0.1.0-installer.tar.gz
 cd FolioDrive-0.1.0-installer
 chmod +x installer/install-foliodrive.sh installer/steps/*.sh
 ./installer/install-foliodrive.sh
 ```
 
-1. Abra **SeaDrive** → login no seu servidor Seafile  
-2. Abra **FolioDrive** em `~/SeaDrive`
+Depois:
 
-O instalador **não** baixa nada de seafile.com ou GNOME upstream.
+1. Abra **SeaDrive** e faça login no **seu** servidor Seafile  
+2. Abra **FolioDrive** em `~/SeaDrive`  
+3. Teste Free up space / Always keep e a coluna SeaDrive  
 
-## Maintainer (lab Ubuntu 24.04)
+O instalador **não** baixa nada do site oficial do Seafile: tudo já vem pinado dentro do `.tar.gz` do Release.
+
+---
+
+## O que é este repositório (git)
+
+- Código do instalador, extensão, `VERSIONS.json`, docs  
+- Para **desenvolvimento** e manutenção  
+- Arquivos grandes (AppImage SeaDrive, etc.) ficam no **Release**, não no clone  
+
+Clonar o git **sem** o pacote do Release **não** basta para instalar.
+
+---
+
+## Desenvolvimento / montar um release novo
+
+Feito no lab ou nesta pasta, **só pelo maintainer** (não é passo do usuário final):
 
 ```bash
-cd product
-chmod +x scripts/*.sh forks/nautilus/apply-branding.sh installer/install-foliodrive.sh installer/steps/*.sh
-./scripts/fetch-seadrive.sh              # uma vez: pin SeaDrive (maintainer)
-./scripts/build-foliodrive-files.sh      # build Nautilus fork → tarball
+./scripts/fetch-seadrive.sh
+./scripts/build-foliodrive-files-wrapper.sh   # ou build-foliodrive-files.sh
 ./scripts/build-bundle.sh
 ./scripts/update-versions.sh
-./installer/install-foliodrive.sh        # teste na VM
-./scripts/package-release.sh             # artefato para GitHub Release
+./scripts/package-release.sh
 ```
 
-Promover para produção:
+Anexe `dist/FolioDrive-x.y.z-installer.tar.gz` à Release no GitHub.
 
-```powershell
-# Windows (host)
-.\product\scripts\promote-to-foliodrive.ps1
-```
-
-```bash
-# Linux / Git Bash
-./product/scripts/promote-to-foliodrive.sh
-```
-
-Publicar GitHub: após promover, ver `SETUP-GITHUB.md` no repo FolioDrive.
-
-## Estrutura
-
-```
-product/
-  VERSIONS.json          # pins canônicos
-  bundle/                # blobs (Release, não git)
-  installer/             # install-foliodrive.sh + steps/
-  scripts/               # build, fetch, promote, package-release
-  forks/nautilus/        # branding + build doc
-  assets/                # .desktop
-  flatpak/               # fase 2 (Flathub)
-  extension/             # aponta para forks/seadrive-ext
-```
+Detalhes: [docs/VM-BUILD.md](docs/VM-BUILD.md)
 
 ## Licença
 
 GPL-3.0 — [LICENSE](LICENSE) · [NOTICE](NOTICE)
+
+Mensagens de commit deste projeto: **português do Brasil**.
