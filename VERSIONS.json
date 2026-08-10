@@ -19,7 +19,7 @@
     "foliodrive_files": {
       "version": "50.2.2-foliodrive.1",
       "file": "foliodrive-files-50.2.2-foliodrive.1.tar.gz",
-      "sha256": "",
+      "sha256": "d7bc7e094968b6417fce49d6febb8dfc2db6d51b9b56dee01b0aaae30e61bbc9",
       "nautilus_upstream_tag": "50.2.2",
       "nautilus_upstream_commit": "",
       "foliodrive_patches_commit": ""
@@ -27,7 +27,7 @@
     "seadrive_extension": {
       "version": "0.0.1-foliodrive.1",
       "file": "seadrive_extension.py",
-      "sha256": "c9ab5a77ab1187ff24a4073ecc1c3ef423c84647430626891d43fb6a3120a6b8",
+      "sha256": "8ea2db82c1fff8bbe2bfc491a8ef8a2b7963d735d080b6cd1e88c7daf21eb0c2",
       "source_commit": ""
     }
   },
