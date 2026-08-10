@@ -77,6 +77,11 @@ _build_meson() {
     bash "${BRAND}" "$(pwd)"
   fi
 
+  # Ubuntu 26.04: pkg-config é gexiv2 (não gexiv2-0.16 do upstream)
+  if [[ -f meson.build ]]; then
+    sed -i "s/dependency('gexiv2-0.16', version: '>= 0.16.0')/dependency('gexiv2')/g" meson.build || true
+  fi
+
   log "meson setup (prefix=${PREFIX})"
   # Nautilus 50.x: tests = none|headless|all (não boolean)
   meson setup build --prefix="${PREFIX}" -Dtests=none || return 1
