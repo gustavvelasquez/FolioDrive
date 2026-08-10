@@ -42,7 +42,8 @@ _build_meson() {
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
     libtinysparql-dev \
     libgdk-pixbuf-2.0-dev \
-    blueprint-compiler
+    blueprint-compiler \
+    gobject-introspection libgirepository1.0-dev libgirepository-2.0-dev
 
   rm -rf "${BUILD_ROOT}"
   mkdir -p "${BUILD_ROOT}"
