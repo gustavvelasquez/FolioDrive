@@ -45,25 +45,10 @@ fi
 _wrap="$(mktemp)"
 cat > "${_wrap}" <<'WRAP'
 #!/usr/bin/env bash
-# #region agent log
-_FD_DBG="${HOME}/.cache/foliodrive/debug-ff43e4.ndjson"
-mkdir -p "$(dirname "${_FD_DBG}")" 2>/dev/null || true
-{
-  printf '{"sessionId":"ff43e4","runId":"launch","hypothesisId":"B","location":"foliodrive-files-wrapper","message":"wrapper_start","data":{"args":"%s","display":"%s","wayland":"%s"},"timestamp":%s}\n' \
-    "$*" "${DISPLAY:-}" "${WAYLAND_DISPLAY:-}" "$(($(date +%s%N)/1000000))"
-} >> "${_FD_DBG}" 2>/dev/null || true
-# #endregion
 export LD_LIBRARY_PATH="/opt/foliodrive/lib/x86_64-linux-gnu:/opt/foliodrive/lib:${LD_LIBRARY_PATH:-}"
 export XDG_DATA_DIRS="/opt/foliodrive/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 export GSETTINGS_SCHEMA_DIR="/opt/foliodrive/share/glib-2.0/schemas${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}"
-# #region agent log
-if ! /opt/foliodrive/bin/foliodrive-files "$@" ; then
-  _rc=$?
-  printf '{"sessionId":"ff43e4","runId":"launch","hypothesisId":"D","location":"foliodrive-files-wrapper","message":"wrapper_exec_failed","data":{"rc":%s},"timestamp":%s}\n' \
-    "${_rc}" "$(($(date +%s%N)/1000000))" >> "${_FD_DBG}" 2>/dev/null || true
-  exit "${_rc}"
-fi
-# #endregion
+exec /opt/foliodrive/bin/foliodrive-files "$@"
 WRAP
 sudo_run install -m 755 "${_wrap}" "${FOLIODRIVE_WRAPPER}"
 rm -f "${_wrap}"
