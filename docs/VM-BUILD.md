@@ -96,6 +96,8 @@ file /opt/foliodrive/bin/foliodrive-files
 Isolamento produto:
 
 - Extensão só em `/opt/foliodrive/share/nautilus-python/extensions/`
+- Loader: copiar `libnautilus-python.so` para `/opt/foliodrive/lib/x86_64-linux-gnu/nautilus/extensions-4/` (o fork não usa o path do SO)
+- Runtime apt: `libcloudproviders0` + `python3-nautilus` (obrigatórios)
 - UI (lista/coluna) em schemas `com.foliodrive.files.*` — **não** `org.gnome.nautilus.*`
 
 ## 6) Release GitHub
