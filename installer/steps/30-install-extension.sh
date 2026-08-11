@@ -33,6 +33,10 @@ if [[ -z "${_sys_py}" ]]; then
 fi
 sudo_run mkdir -p "${_fd_ext4}"
 sudo_run cp -f "${_sys_py}" "${_fd_ext4}/libnautilus-python.so"
+if [[ ! -f "${_fd_ext4}/libnautilus-python.so" ]]; then
+  echo "ERRO: falha ao instalar ${_fd_ext4}/libnautilus-python.so"
+  exit 1
+fi
 echo "Loader Python: ${_fd_ext4}/libnautilus-python.so"
 
 # Remover residual do antigo Plano B (extensão no Arquivos do SO via ~/.local)
